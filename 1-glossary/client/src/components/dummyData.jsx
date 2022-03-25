@@ -1,11 +1,11 @@
 var dummyGlosary = [
   {
     word: 'cat',
-    meanings: 'dummydummydummy'
+    definition: 'catcatcat'
   },
   {
     word: 'cat2',
-    meanings: 'dummydummydummy22222'
+    definition: 'cat2cat2cat2'
   }
 ]
 

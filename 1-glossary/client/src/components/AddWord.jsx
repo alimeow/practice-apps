@@ -20,17 +20,18 @@ class AddWord extends React.Component {
   }
 
   //once submit, app renders new word and the definition grabed from api
-  handleSubmit() {
+  handleSubmit(e) {
+    console.log('add button clicked')
     event.preventDefault();
     //link to app
-
+    this.props.addWord(this.state.searchTerm)
   }
 
   render() {
     return (
       <div>
         <input type='text' placeholder='add a new word' value={this.state.value} onChange={this.handleChange}></input>
-        <button onSubmit={this.handleSubmit}>Add</button>
+        <button onClick={this.handleSubmit}>Add</button>
       </div>
     )
   }

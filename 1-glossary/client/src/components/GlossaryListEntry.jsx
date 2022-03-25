@@ -5,17 +5,28 @@ class GlossaryListEntry extends React.Component {
     super(props)
 
     this.state = {
+
     }
+
+  }
+
+  handleEdit() {
+
+  }
+
+  handleDelete() {
+
   }
 
   render() {
     return (
       <div>
-        <span><i>Word:</i> {this.props.glossary.meanings} </span>
+        <span><i>Word:</i> {this.props.glossary.word} </span>
         {/* below should display the meaning of the word grab from api */}
-        <li>Definition: </li>
-        <button>edit</button>
-        <button>delete</button>
+        <p>Definition: {this.props.glossary.definition}</p>
+        <button onSubmit={this.handleEdit}>edit</button>
+        {/* onSubmit or onClick? */}
+        <button onSubmit={this.handleDelete}>delete</button>
       </div>
     )
   }
