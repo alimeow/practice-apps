@@ -52,18 +52,18 @@ app.post('/glossary', function(req, res) {
     //   }
     // })
 
-    // let checkExist = db.findWord(newData.word)  //db is not a function error
-    // console.log(checkExist)
-
     // how to save then get all information back and send back?
-    //conditional then save. if get data back then skip
-    db.save(newData)
-      .then( () =>
-        db.getAll()
-          .then(allNewData => res.send(allNewData))
-          .catch(err => console.log('Error while saving: ' + err)
-      )
-      .catch(err => console.log('Error while saving: ' + err)))
+    db.findWord(newData.word)
+    .then( () =>
+      db.save(newData)
+        .then( () =>
+          db.getAll()
+            .then(allNewData => res.send(allNewData))
+            .catch(err => console.log('Error while saving: ' + err)
+        )
+        .catch(err => console.log('Error while saving: ' + err)))
+    )
+    .catch((err) => console.log('The word exists already. ' + err))
 
 
     //after saving data to db, send data back to client react side.  *** below line doesn't work. why? how to also send back data

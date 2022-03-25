@@ -17,7 +17,7 @@ let gModels = mongoose.model('gModels', glossarySchema);
 // 4. Import the models into any modules that need them
 //wait how to save db
 let save = (queryWord) => {
-  // if (gModels.find({'word': queryWord}).count() === 0) {
+  // if (gModels.find({'word': queryWord}).count() === 0) {  //not working will get error
     return gModels.create(queryWord)  //need to return promise for server to use
   // }
   // , function(err, result) {
@@ -57,3 +57,4 @@ let findWord = (wordVal) => {
 module.exports.save = save; //
 module.exports.getAll = getAll; //
 module.exports.delWord = delWord;
+module.exports.findWord = findWord;
