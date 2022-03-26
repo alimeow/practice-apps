@@ -17,6 +17,7 @@ class App extends React.Component {
 
     this.addWord = this.addWord.bind(this);
     this.getAllWords = this.getAllWords.bind(this);
+    // this.deleteWord = this.deleteWord.bind(this);
   }
 
   componentDidMount() {
@@ -46,16 +47,25 @@ class App extends React.Component {
       this.setState({glossaryList: result.data})  //*** come back to check */
     })
     .catch(err => console.log('Error', err))
-
-    // this.setState({glossaryList: /* data get from database? */})
   }
+
+  //delete word (in case needed)
+  // deleteWord(val) {
+  //   console.log(val)
+  //   axios.delete('/glossary', {
+  //     word: val
+  //   })
+  //   //when do i handle err? when do I not need to handle error?
+  //   .then((response) => console.log(response))
+  //   .catch(err => console.log('Error while deleting: ', err))
+  // }
 
   render() {
     return (
       <div>
         <AddWord addWord={this.addWord}/>
         <Search />
-        <GlossaryList glossaries={this.state.glossaryList}/>
+        <GlossaryList glossaries={this.state.glossaryList} getAllWords={this.getAllWords}/>
       </div>
     )
   }

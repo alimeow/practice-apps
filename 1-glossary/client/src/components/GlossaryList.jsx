@@ -7,7 +7,9 @@ var GlossaryList = (props) => {
     <div>
       {
         props.glossaries.map((glossary, index) =>
-        (<GlossaryListEntry key={index} glossary={glossary}/>)
+        (<GlossaryListEntry key={index} glossary={glossary}
+          getAllWords={props.getAllWords}
+        />)
         )
       }
     </div>

@@ -74,12 +74,18 @@ app.post('/glossary', function(req, res) {
 
 
 app.delete('/glossary', function(req, res) {
-  let word = req.body.word;
+  let word = req.body.word; //*** it's called body */
+  console.log('req', req)
+  // console.log('req.data ', req.data)
   //axios delete does not support a request body
   //eg:  axios.delete(url, {data: {foo: 'bar'}});
-  console.log(word)
+  // console.log('req is: ', req)
+  // console.log('word: ', word) //
   db.delWord(word)
-  .then(() => res.sendStatus(200))
+  .then((returnData) =>
+  // res.sendStatus(200)
+  res.send(returnData)
+  )
   .catch(err => ('Error when trying to delete.', err))
 })
 

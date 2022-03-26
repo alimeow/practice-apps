@@ -43,10 +43,9 @@ let getAll = () => {
   //************************************************************ */
 }
 
-let delWord = (/* some value that will be used to filter? */word) => {
+let delWord = (/* some value that will be used to filter? */wordVal) => {
   //delete first entry matches the filter: what is that filter like?
-  gModels.findOneAndDelete()
-  //if want to delete first item use {}. so we put a criteria in {}? but it's giving me error
+  return gModels.findOneAndDelete({word: wordVal})
 }
 
 //findOne function
@@ -54,6 +53,8 @@ let findWord = (wordVal) => {
   return gModels.findOne({word: wordVal})
 }
 
+
+//Is there a way to simplify these exports?
 module.exports.save = save; //
 module.exports.getAll = getAll; //
 module.exports.delWord = delWord;
