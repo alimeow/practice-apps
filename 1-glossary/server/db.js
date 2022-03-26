@@ -33,12 +33,12 @@ let save = (queryWord) => {
 
 //for get method in server
 let getAll = () => {
-  //can we return ? huh it actually works why? isn't it callback?
+  //returning the promise to server
   //****************************** */
   return gModels.find()
-  //use promise it won't work though
+  //use promise it won't work --
   // gModels.find()
-  // .then(allData => res.send(allData))  //no res access here
+  // .then(allData => res.send(allData))  //well no res access here --
   // .catch(err => console.log('Error', error.message))
   //************************************************************ */
 }
@@ -53,9 +53,13 @@ let findWord = (wordVal) => {
   return gModels.findOne({word: wordVal})
 }
 
+let editDefinition = (wordVal, userDefinition) => {
+  return gModels.findOneAndUpdate({word: wordVal}, {definition: userDefinition})
+}
 
 //Is there a way to simplify these exports?
 module.exports.save = save; //
 module.exports.getAll = getAll; //
 module.exports.delWord = delWord;
 module.exports.findWord = findWord;
+module.exports.editDefinition = editDefinition;

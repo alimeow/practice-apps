@@ -4,6 +4,7 @@ import GlossaryList from './GlossaryList.jsx';
 import Search from './Search.jsx';
 import AddWord from './AddWord.jsx';
 import axios from 'axios';
+import Popup from './Popup.js';
 
 var newList = [];
 
@@ -50,21 +51,25 @@ class App extends React.Component {
   }
 
   //delete word (in case needed)
-  // deleteWord(val) {
-  //   console.log(val)
-  //   axios.delete('/glossary', {
-  //     word: val
-  //   })
-  //   //when do i handle err? when do I not need to handle error?
-  //   .then((response) => console.log(response))
-  //   .catch(err => console.log('Error while deleting: ', err))
-  // }
+  deleteWord(val) {
+    console.log(val)
+    axios.delete('/glossary', {
+      word: val
+    })
+    //when do i handle err? when do I not need to handle error?
+    .then((response) => console.log(response))
+    .catch(err => console.log('Error while deleting: ', err))
+  }
+
+
 
   render() {
     return (
       <div>
         <AddWord addWord={this.addWord}/>
         <Search />
+        {/* <button>click for Popup</button>
+        <Popup trigger={false}>This is the Popup Window</Popup> */}
         <GlossaryList glossaries={this.state.glossaryList} getAllWords={this.getAllWords}/>
       </div>
     )

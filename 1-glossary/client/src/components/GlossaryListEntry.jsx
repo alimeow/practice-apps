@@ -1,18 +1,35 @@
 import React from "react";
 import axios from "axios";
+import Popup from './Popup.js';
 
 class GlossaryListEntry extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-
+      // newDefinition: '',
+      popupClicked: false
     }
+
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleEditButtonClick = this.handleEditButtonClick.bind(this);
   }
 
-  handleEdit() {
+  handleEditButtonClick() {
+    this.setState({popupClicked: !this.state.popupClicked})
+    // console.log(this.state.popupClicked)
+  }
 
+  handleEdit(val) {
+    console.log(val)
+    axios.patch('/glossary', {
+        word: this.props.glossary.word,    //this.props.glossary.word,
+        definition: val        //this.state.newDefinition
+    })
+    // .then((result) => console.log('result',result))
+    .then(() => this.props.getAllWords())
+    .catch(err => console.log('Error while editing: ', err))
   }
 
   handleDelete() {
@@ -27,16 +44,20 @@ class GlossaryListEntry extends React.Component {
     .then(() => this.props.getAllWords())  //
     .catch(err => console.log('Error while deleting: ', err))
     //------------------------------------------------------------
-    // this.props.deleteWord(glossary)
+    // this.props.deleteWord(glossary) //another way to implement
   }
+
+  // saveUserDefinition(val) {
+    // axios.patch
+  // }
 
   render() {
     return (
       <div>
         <span><i>Word:</i> {this.props.glossary.word} </span>
-        {/* below should display the meaning of the word grab from api */}
         <p>Definition: {this.props.glossary.definition}</p>
-        <button onClick={this.handleEdit}>edit</button>
+        <button onClick={this.handleEditButtonClick} >edit definition</button>
+        <Popup trigger={this.state.popupClicked} handleEdit={this.handleEdit}turnTriggerOff={this.handleEditButtonClick}>This is the Popup Window</Popup>
         {/* onSubmit or onClick? */}
         <button onClick={this.handleDelete}>delete</button>
       </div>

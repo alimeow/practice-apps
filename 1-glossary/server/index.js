@@ -40,7 +40,7 @@ app.post('/glossary', function(req, res) {
       word: response.data[0].word,  //word or 'word'? ***
       definition: response.data[0].meanings[0].definitions[0].definition
     }
-    console.log('newData is: ', newData)
+    // console.log('newData is: ', newData)
     //save newData to db using save method which takes in data and a callback
 
     // db.save(newData, function(err, sucess) {
@@ -65,7 +65,6 @@ app.post('/glossary', function(req, res) {
     )
     .catch((err) => console.log('The word exists already. ' + err))
 
-
     //after saving data to db, send data back to client react side.  *** below line doesn't work. why? how to also send back data
     // res.send(newData)
   })
@@ -75,7 +74,7 @@ app.post('/glossary', function(req, res) {
 
 app.delete('/glossary', function(req, res) {
   let word = req.body.word; //*** it's called body */
-  console.log('req', req)
+  // console.log('req', req)
   // console.log('req.data ', req.data)
   //axios delete does not support a request body
   //eg:  axios.delete(url, {data: {foo: 'bar'}});
@@ -84,13 +83,23 @@ app.delete('/glossary', function(req, res) {
   db.delWord(word)
   .then((returnData) =>
   // res.sendStatus(200)
+  // console.log(returnData)
   res.send(returnData)
   )
-  .catch(err => ('Error when trying to delete.', err))
+  // .catch(err => console.log('Error when trying to delete.', err))
+  .catch(err => res.sendStatus(500))
 })
 
+app.patch('/glossary', function(req, res) {
+  console.log(req)
+  // console.log(req.body.word, req.body.definition)
+  db.editDefinition(req.body.word, req.body.definition)
+  .then(()=> res.sendStatus(200))
+  .catch(err => res.sendStatus(500))
+})
 
 
 //get port number from env file.  but why is it process.env? *
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);
+
